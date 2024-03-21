@@ -1,0 +1,67 @@
+{
+    "AssignableScopes": [
+        "/subscriptions/XXXXXXXX"
+    ],
+    "Description": "Allow Access read a subset of Admin APIs. explicity denies write, delete and read acess to core object that are namespaced scoped. Basically we attempt to Allow read access to the core non-namespace objects. This role does not allow viewing or modifying secrets, roles or role bindings. This role does not allow viewing or modifying the cluster's configuration. This role does not allow viewing or modifying the cluster's networking configuration. This role does not allow viewing or modifying the cluster's storage configuration. This role does not allow viewing or modifying the cluster's API server configuration. This role does not allow viewing or modifying the cluster's authentication configuration. This role does not allow viewing or modifying the cluster's authorization configuration. This role does not allow viewing or modifying the cluster's admission. Important. This role should be applied at Cluster scope. This role should be used as an additive role ontop the built in roles RBAC Writer, RBAC reade and RBAC admin which are applied on the Namepsace level. Applying this on the Namespace level should not have an effect",
+    "Name": "Azure Kubernetes Service RBAC ReadOnly Admin",
+    "Actions": [
+        "Microsoft.Authorization/*/read",
+        "Microsoft.Resources/subscriptions/operationresults/read",
+        "Microsoft.Resources/subscriptions/read",
+        "Microsoft.Resources/subscriptions/resourceGroups/read"
+    ],
+    "IsCustom": true,
+    "DataActions": [
+        "Microsoft.ContainerService/managedClusters/serviceaccounts/read",
+        "Microsoft.ContainerService/managedClusters/node.k8s.io/runtimeclasses/read",
+        "Microsoft.ContainerService/managedClusters/nodes/read",
+        "Microsoft.ContainerService/managedClusters/apps/controllerrevisions/read",
+        "Microsoft.ContainerService/managedClusters/events.k8s.io/events/read",
+        "Microsoft.ContainerService/managedClusters/limitranges/read",
+        "Microsoft.ContainerService/managedClusters/metrics.k8s.io/pods/read",
+        "Microsoft.ContainerService/managedClusters/metrics.k8s.io/nodes/read",
+        "Microsoft.ContainerService/managedClusters/resourcequotas/read",
+        "Microsoft.ContainerService/managedClusters/namespaces/read"
+
+    ],
+    "NotActions": [],
+    "NotDataActions": [
+        "Microsoft.ContainerService/managedClusters/admissionregistration.k8s.io/*",
+        "Microsoft.ContainerService/managedClusters/api/*",
+        "Microsoft.ContainerService/managedClusters/apiregistration.k8s.io/apiservices/*",
+        "Microsoft.ContainerService/managedClusters/apis/*",
+        "Microsoft.ContainerService/managedClusters/authentication.k8s.io/*",
+        "Microsoft.ContainerService/managedClusters/authorization.k8s.io/*",
+        "Microsoft.ContainerService/managedClusters/bindings/*",
+        "Microsoft.ContainerService/managedClusters/certificates.k8s.io/*",
+        "Microsoft.ContainerService/managedClusters/componentstatuses/*",
+        "Microsoft.ContainerService/managedClusters/coordination.k8s.io/*",
+        "Microsoft.ContainerService/managedClusters/discovery.k8s.io/endpointslices/*",
+        "Microsoft.ContainerService/managedClusters/endpoints/*",
+        "Microsoft.ContainerService/managedClusters/extensions/podsecuritypolicies/*",
+        "Microsoft.ContainerService/managedClusters/flowcontrol.apiserver.k8s.io/*",
+        "Microsoft.ContainerService/managedClusters/groups/impersonate/*",
+        "Microsoft.ContainerService/managedClusters/healthz/*",
+        "Microsoft.ContainerService/managedClusters/livez/*",
+        "Microsoft.ContainerService/managedClusters/metrics/*",
+        "Microsoft.ContainerService/managedClusters/metrics.k8s.io/*",
+        "Microsoft.ContainerService/managedClusters/networking.k8s.io/ingressclasses/*",
+        "Microsoft.ContainerService/managedClusters/node.k8s.io/*",
+        "Microsoft.ContainerService/managedClusters/nodes/write",
+        "Microsoft.ContainerService/managedClusters/nodes/delete",
+        "Microsoft.ContainerService/managedClusters/openapi/v2/*",
+        "Microsoft.ContainerService/managedClusters/persistentvolumes/*",
+        "Microsoft.ContainerService/managedClusters/podtemplates/*",
+        "Microsoft.ContainerService/managedClusters/policy/podsecuritypolicies/*",
+        "Microsoft.ContainerService/managedClusters/rbac.authorization.k8s.io/*",
+        "Microsoft.ContainerService/managedClusters/readyz/*",
+        "Microsoft.ContainerService/managedClusters/resetMetrics/*",
+        "Microsoft.ContainerService/managedClusters/scheduling.k8s.io/*",
+        "Microsoft.ContainerService/managedClusters/secrets/*",
+        "Microsoft.ContainerService/managedClusters/storage.k8s.io/*",
+        "Microsoft.ContainerService/managedClusters/swagger-api/*",
+        "Microsoft.ContainerService/managedClusters/ui/*",
+        "Microsoft.ContainerService/managedClusters/users/*",
+        "Microsoft.ContainerService/managedClusters/version/*"
+    ]
+}

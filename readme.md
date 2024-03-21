@@ -40,11 +40,12 @@ Applying the  above role to a namespace level will restrict a user to only that 
 az role assignment create --role "Azure Kubernetes Service RBAC Reader" --assignee <AAD-ENTITY-ID> --scope $AKS_ID/namespaces/<namespace-name>
 ```
 ## Deploy Custom role 
-Theres are two definitions files that can be deploy   
- * [ ClusterScopedReadonlyClusterAdmin ](ClusterScopedReadonlyClusterAdmin.json): Should be used in combination with one of the builtin roles. when used with a built inrole this gives a normal admin on a namespace read access to selected non-namespaced objects. 
+Theres are thress definitions files that can be deploy   
+ * [ ClusterScopedReadonlyClusterAdmin ](ClusterScopedReadonlyClusterAdmin.json) Should be used in combination with one of the builtin roles. when used with a built inrole this gives a normal admin on a namespace read access to selected non-namespaced objects. 
+ * [ ClusterScopedReadonlyNodes ](ClusterScopedReadonlyNodes.json): Should be used in combination with one of the builtin roles. when used with a built inrole this gives a normal admin on a namespace read access to selected non-namespaced objects.  This differs from the [ ClusterScopedReadonlyClusterAdmin ](ClusterScopedReadonlyClusterAdmin.json)as it does not give wildcard read access and therefore does not allow a user to view CRDs. For readonly access against nodes, then this is recommended. 
  * [limitedAdminReader](limitedAdminReader.json) : Includes the wildcard readme across all resources but explicity add read and write access for other API types. the assumption with this roles is the user does not have any additional roles.  This was used as a test Role and it is instead recommended to the ClusterScopedReadonlyClusterAdmin.json role 
 
-<mark>Note:</mark> Both definitions restrict access to roles and secrets. 
+<mark>Note:</mark> three definitions restrict access to roles and secrets. 
 
 To deploy execute the following. 
 ```
@@ -62,11 +63,11 @@ Before deploying update the field `AssignableScopes`to include either the root `
 The following outlines why each right was applied and how. 
 
 * Grant read to all objects, including non-namespaced apis. The reason a wildcard is used is to ensure the CRD definitions are included
-  *   `Microsoft.ContainerService/managedClusters/*/read`
+  *   `Microsoft.ContainerService/managedClusters/*/read`   
+<mark>this is not used in  ClusterScopedReadonlyNodes , and example can be found in [text](ClusterScopedReadonlyClusterAdmin.json) </mark> 
 * Grant read access to node and non-namespace level objects. (although already included above )
 ```           
     "DataActions": [
-        "Microsoft.ContainerService/managedClusters/*/read",
         "Microsoft.ContainerService/managedClusters/serviceaccounts/read",
         "Microsoft.ContainerService/managedClusters/node.k8s.io/runtimeclasses/read",
         "Microsoft.ContainerService/managedClusters/nodes/read",
